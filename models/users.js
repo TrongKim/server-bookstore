@@ -2,10 +2,9 @@ const { Sequelize, sequelize } = require('./index');
 
 const User = sequelize.define('User', {
     id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+        type: Sequelize.STRING,
+        allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
     },
     username: {
         type: Sequelize.STRING,
