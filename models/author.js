@@ -41,7 +41,11 @@ const Author = sequelize.define('Author', {
     awards: {
         type: Sequelize.STRING,
         allowNull: false
-    }
+    },
+    images: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
 });
 
-module.exports = Product;
+module.exports = Author;

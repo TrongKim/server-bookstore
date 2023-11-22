@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const New = require('../models/new');
+const Rate = require('../models/rate');
 
 router.post('/create', (req, res) => {
-    New.create({
-        name: req.body.name,
-        description: req.body.description,
-        image: req.body.image,
-        author_id: req.body.author_id
+    Rate.create({
+        id: '',
+        message: req.body.message,
+        rate: req.body.rate,
+        id_product: req.body.id_product
     })
         .then(new_data => {
             return res.status(200).json({
                 status: 200,
                 data: new_data,
-                message: 'create new_data successfully'
+                message: 'create rate successfully'
             });
         })
         .catch(error => {
@@ -23,37 +23,12 @@ router.post('/create', (req, res) => {
 });
 
 router.get('/get-all', (req, res) => {
-    New.findAll()
+    Rate.findAll()
         .then(new_data => {
             return res.status(200).json({
                 status: 200,
                 data: new_data,
-                message: 'get news successfully'
-            });
-        })
-        .catch(error => {
-            console.error('Lỗi:', error);
-        });
-});
-
-router.get('/get-by-query', (req, res) => {
-    if (!req.query.search_query) {
-        return req.status(404).json({
-            status: 404,
-            data: {},
-            message: 'not found search query'
-        });
-    }
-    New.findAll({
-        where: {
-            [Op.iLike]: `%${req.query.search_query}%`,
-        }
-    })
-        .then(new_data => {
-            return res.status(200).json({
-                status: 200,
-                data: new_data,
-                message: 'get news successfully'
+                message: 'get rate successfully'
             });
         })
         .catch(error => {
@@ -62,7 +37,7 @@ router.get('/get-by-query', (req, res) => {
 });
 
 router.get('/get-one', (req, res) => {
-    New.findOne({
+    Rate.findOne({
         where: {
             id: req.body.id
         }
@@ -71,7 +46,7 @@ router.get('/get-one', (req, res) => {
             return res.status(200).json({
                 status: 200,
                 data: new_data,
-                message: 'get new successfully'
+                message: 'get rate successfully'
             });
         })
         .catch(error => {
@@ -80,16 +55,9 @@ router.get('/get-one', (req, res) => {
 });
 
 router.post('/update', (req, res) => {
-    New.update({
-        country: req.body.country,
-        language: req.body.language,
-        genre: req.body.genre,
-        publication_date: req.body.publication_date,
-        share_us_on: req.body.share_us_on,
-        name: req.body.name,
-        description: req.body.description,
-        story: req.body.story,
-        awards: req.body.awards
+    Rate.update({
+        message: req.body.message,
+        rate: req.body.rate,
     },
     {
         where: {
@@ -100,7 +68,7 @@ router.post('/update', (req, res) => {
             return res.status(200).json({
                 status: 200,
                 data: new_data,
-                message: 'update new successfully'
+                message: 'update rate successfully'
             });
         })
         .catch(error => {
@@ -119,13 +87,13 @@ router.post('delete', async (req, res) => {
                 return res.status(200).json({
                     status: 200,
                     data: {},
-                    message: 'delete new successfully'
+                    message: 'delete rate successfully'
                 });
             } else {
                 return res.status(404).json({
                     status: 404,
                     data: {},
-                    message: 'not found new to delete'
+                    message: 'not found rate to delete'
                 });
             }
         })

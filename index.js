@@ -8,9 +8,13 @@ app.use(express.json());
 
 const productRoute = require('./routes/product');
 const authorRoute = require('./routes/author');
+const newRoute = require('./routes/new');
+const rateRoute = require('./routes/rate');
 
 app.use('/product', productRoute);
 app.use('/author', authorRoute);
+app.use('/new', newRoute);
+app.use('/new', rateRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

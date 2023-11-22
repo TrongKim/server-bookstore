@@ -1,27 +1,23 @@
 const { Sequelize, sequelize } = require('./index');
 
-const New = sequelize.define('New', {
+const Rate = sequelize.define('Rate', {
     id: {
         type: Sequelize.STRING,
         allowNull: false,
         primaryKey: true,
     },
-    name: {
+    message: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    description: {
-        type: Sequelize.STRING,
-        allowNull: false
+    rate: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     },
-    image: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    author_id: {
+    id_product: {
         type: Sequelize.STRING,
         allowNull: false
     }
 });
 
-module.exports = New;
+module.exports = Rate;

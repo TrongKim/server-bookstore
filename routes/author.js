@@ -13,7 +13,8 @@ router.post('/create', (req, res) => {
         name: req.body.name,
         description: req.body.description,
         story: req.body.story,
-        awards: req.body.awards
+        awards: req.body.awards,
+        images: req.body.images,
     })
         .then(author => {
             return res.status(200).json({
@@ -37,7 +38,7 @@ router.get('/get-one', (req, res) => {
             return res.status(200).json({
                 status: 200,
                 data: author,
-                message: 'create author successfully'
+                message: 'get author successfully'
             });
         })
         .catch(error => {

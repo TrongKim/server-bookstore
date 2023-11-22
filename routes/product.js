@@ -18,8 +18,8 @@ router.get('/get-all', async (req, res) => {
 });
 
 router.get('/get-books-by-name', async (req, res) => {
-    if (!res.query.search_query) {
-        return res.status(404).json({
+    if (!req.query.search_query) {
+        return req.status(404).json({
             status: 404,
             data: {},
             message: 'not found search query'
@@ -28,7 +28,7 @@ router.get('/get-books-by-name', async (req, res) => {
     Product.findAll({
         where: {
             name: {
-                [Op.iLike]: `%${res.query.search_query}%`, // Sử dụng Op.iLike để tìm kiếm không phân biệt chữ hoa chữ thường
+                [Op.iLike]: `%${req.query.search_query}%`, // Sử dụng Op.iLike để tìm kiếm không phân biệt chữ hoa chữ thường
             },
         }
     })
