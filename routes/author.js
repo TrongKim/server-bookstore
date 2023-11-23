@@ -5,6 +5,7 @@ const Author = require('../models/author');
 
 router.post('/create', (req, res) => {
     Author.create({
+        id: String(Date.now()) + 'author' + String(Math.random()),
         country: req.body.country,
         language: req.body.language,
         genre: req.body.genre,

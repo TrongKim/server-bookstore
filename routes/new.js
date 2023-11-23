@@ -5,6 +5,7 @@ const New = require('../models/new');
 
 router.post('/create', (req, res) => {
     New.create({
+        id: String(Date.now()) + 'new' + String(Math.random()),
         name: req.body.name,
         description: req.body.description,
         image: req.body.image,

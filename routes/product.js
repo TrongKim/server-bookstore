@@ -28,7 +28,7 @@ router.get('/get-books-by-name', async (req, res) => {
     Product.findAll({
         where: {
             name: {
-                [Op.iLike]: `%${req.query.search_query}%`, // Sử dụng Op.iLike để tìm kiếm không phân biệt chữ hoa chữ thường
+                [Op.iLike]: `%${req.query.search_query}%`,
             },
         }
     })
@@ -70,7 +70,7 @@ router.get('/get-one', async (req, res) => {
 
 router.post('/create', async (req, res) => {
     Product.create({
-        id: '',
+        id: String(Date.now()) + 'product' + String(Math.random()),
         name: req.body.name,
         genres: req.body.genres,
         price: req.body.price,

@@ -1,6 +1,8 @@
 const express = require('express');
 const { sequelize } = require('./models/index');
 const app = express();
+var cors = require('cors');
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
@@ -33,7 +35,8 @@ app.listen(PORT, () => {
 //     console.error('Lỗi tạo người dùng:', error);
 //   });
 
-sequelize.sync({ force: true })
+
+sequelize.sync()
   .then(() => {
     console.log('Cơ sở dữ liệu đã được đồng bộ hóa');
   })

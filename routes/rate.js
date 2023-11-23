@@ -5,7 +5,7 @@ const Rate = require('../models/rate');
 
 router.post('/create', (req, res) => {
     Rate.create({
-        id: '',
+        id: String(Date.now()) + 'rate' + String(Math.random()),
         message: req.body.message,
         rate: req.body.rate,
         id_product: req.body.id_product
