@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { Op } = require('sequelize');
 
 const Product = require('../models/products');
 
@@ -14,6 +15,39 @@ router.get('/get-all', async (req, res) => {
         })
         .catch(error => {
             console.error('Lỗi:', error);
+        });
+});
+
+router.post('/get-by-ids', async (req, res) => {
+    if (!req.body?.ids_product) {
+        return res.status(404).send({
+            status: 404,
+            data: {},
+            message: 'not have ids to query'
+        });
+    }
+
+    Product.findAll({
+        where: {
+            id: {
+                [Op.in]: req.body?.ids_product,
+            },
+        },
+    })
+        .then(products => {
+            return res.status(200).send({
+                status: 200,
+                data: products,
+                message: 'get all products by ids successfully'
+            });
+        })
+        .catch(error => {
+            console.error('Lỗi khi lấy danh sách sản phẩm:', error);
+            return res.status(500).send({
+                status: 500,
+                data: {},
+                message: 'error'
+            });
         });
 });
 
@@ -33,11 +67,11 @@ router.get('/get-books-by-name', async (req, res) => {
         }
     })
         .then(products => {
-            return res.status(200).json({ 
+            return res.status(200).json({
                 status: 200,
                 data: products,
                 message: 'get books by search successfully'
-             });
+            });
         })
         .catch(error => {
             console.error('Lỗi:', error);
@@ -57,7 +91,7 @@ router.get('/get-one', async (req, res) => {
         where: { id: req.query.query }
     })
         .then(product => {
-            return res.status(200).json({ 
+            return res.status(200).json({
                 status: 200,
                 data: product,
                 message: 'get book successfully'
@@ -119,11 +153,11 @@ router.post('update', async (req, res) => {
         amount: req.body.amount,
         author_id: req.body.author_id
     },
-    {
-        where: {
-            id: req.body.id,
-        }
-    })
+        {
+            where: {
+                id: req.body.id,
+            }
+        })
         .then(product => {
             return res.status(200).json({
                 status: 200,
